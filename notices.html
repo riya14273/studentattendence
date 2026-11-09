@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notice Board &amp; Events - Portal | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item active">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn"><i class="fas fa-bars"></i></button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div>
+            <h1 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              Campus Announcements &amp; Notice Board
+            </h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Official bulletins, hackathon updates, upcoming university events, and administrative circulars.
+            </p>
+          </div>
+          <button class="btn btn-primary" id="publishNoticeBtn">
+            <i class="fas fa-plus-circle"></i> Publish New Notice
+          </button>
+        </div>
+
+        <!-- Notices List Container -->
+        <div id="noticesList" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Publish Notice Modal -->
+  <div class="modal-overlay" id="noticeModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-bullhorn" style="color: var(--primary);"></i> Publish Campus Notice</h3>
+        <i class="fas fa-times modal-close" id="closeNoticeModal"></i>
+      </div>
+      <form id="noticeForm">
+        <div class="form-group">
+          <label class="form-label">Notice Headline</label>
+          <input type="text" class="form-control" id="noticeTitleInput" placeholder="e.g. Innovate Prayagraj 2026 Tech Fest Registrations" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-control" id="noticeCategoryInput" required>
+              <option value="Events">Campus Events</option>
+              <option value="Examination">Examination</option>
+              <option value="Academic">Academic</option>
+              <option value="Administrative">Administrative</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <select class="form-control" id="noticePriorityInput" required>
+              <option value="High">High Priority</option>
+              <option value="Normal" selected>Normal</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Author / Publisher Name</label>
+          <input type="text" class="form-control" id="noticeAuthorInput" value="Riya Dubey (Student Coordinator)" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Detailed Notice Content</label>
+          <textarea class="form-control" id="noticeContentInput" rows="4" placeholder="Write full announcement details..." required></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelNoticeBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish to Board</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let notices = AppState.getNotices();
+      const listContainer = document.getElementById("noticesList");
+      const modal = document.getElementById("noticeModal");
+      const form = document.getElementById("noticeForm");
+      const openBtn = document.getElementById("publishNoticeBtn");
+      const closeBtn = document.getElementById("closeNoticeModal");
+      const cancelBtn = document.getElementById("cancelNoticeBtn");
+
+      function renderNotices() {
+        listContainer.innerHTML = "";
+
+        if (notices.length === 0) {
+          listContainer.innerHTML = `
+            <div class="card">
+              <div class="empty-state">
+                <div class="empty-state-icon"><i class="fas fa-bullhorn"></i></div>
+                <h4 class="empty-state-title">No Active Notices</h4>
+                <p class="empty-state-text">There are currently no circulars or events published.</p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        notices.forEach((notice, idx) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.style.borderLeft = notice.priority === "High" ? "4px solid var(--danger)" : "4px solid var(--primary)";
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span class="badge ${notice.priority === 'High' ? 'badge-danger' : 'badge-primary'}">
+                  ${notice.priority === 'High' ? '<i class="fas fa-bolt"></i> Urgent' : notice.category}
+                </span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="far fa-calendar"></i> ${notice.date}</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">&bull; By <strong style="color: var(--primary);">${notice.author}</strong></span>
+              </div>
+              <button class="btn-icon btn-sm delete-notice-btn" data-idx="${idx}" title="Delete Notice" style="color: var(--danger);">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">
+              ${notice.title}
+            </h3>
+
+            <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+              ${notice.content}
+            </p>
+          `;
+
+          listContainer.appendChild(card);
+        });
+
+        document.querySelectorAll(".delete-notice-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const index = parseInt(btn.getAttribute("data-idx"));
+            if (confirm("Delete this campus notice?")) {
+              notices.splice(index, 1);
+              AppState.saveNotices(notices);
+              renderNotices();
+              showToast("Notice deleted successfully", "danger");
+            }
+          });
+        });
+      }
+
+      if (openBtn) openBtn.addEventListener("click", () => modal.classList.add("active"));
+      if (closeBtn) closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      if (cancelBtn) cancelBtn.addEventListener("click", () => modal.classList.remove("active"));
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const title = document.getElementById("noticeTitleInput").value.trim();
+          const category = document.getElementById("noticeCategoryInput").value;
+          const priority = document.getElementById("noticePriorityInput").value;
+          const author = document.getElementById("noticeAuthorInput").value.trim();
+          const content = document.getElementById("noticeContentInput").value.trim();
+
+          const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          const now = new Date();
+          const dateStr = `${months[now.getMonth()]} ${String(now.getDate()).padStart(2, '0')}, ${now.getFullYear()}`;
+
+          notices.unshift({
+            id: "NOT-" + (400 + notices.length + 1),
+            title, category, priority, author, content,
+            date: dateStr
+          });
+
+          AppState.saveNotices(notices);
+          modal.classList.remove("active");
+          form.reset();
+          renderNotices();
+          showToast("Campus announcement published live!", "success");
+        });
+      }
+
+      renderNotices();
+    });
+  </script>
+</body>
+</html>

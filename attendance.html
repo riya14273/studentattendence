@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Records - Portal | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item active">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div>
+            <h1 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              Daily Attendance Management
+            </h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Track student daily check-ins, record present/absent statuses, and calculate monthly turnout.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="markAllPresent">
+              <i class="fas fa-check-double"></i> Mark All Present
+            </button>
+            <button class="btn btn-secondary" id="exportAttReport">
+              <i class="fas fa-download"></i> Export Attendance
+            </button>
+            <button class="btn btn-primary" id="saveAttendance">
+              <i class="fas fa-save"></i> Save Daily Register
+            </button>
+          </div>
+        </div>
+
+        <!-- Attendance Stats Strip -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 1.5rem;">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Present Today</div>
+              <div class="stat-value" id="attPresentCount" style="color: var(--success);">5</div>
+            </div>
+            <div class="stat-icon emerald"><i class="fas fa-user-check"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Absent Today</div>
+              <div class="stat-value" id="attAbsentCount" style="color: var(--danger);">1</div>
+            </div>
+            <div class="stat-icon" style="background: var(--danger-bg); color: var(--danger);"><i class="fas fa-user-times"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Today's Turnout</div>
+              <div class="stat-value" id="attPercentCount" style="color: var(--primary);">83%</div>
+            </div>
+            <div class="stat-icon indigo"><i class="fas fa-percentage"></i></div>
+          </div>
+        </div>
+
+        <!-- Attendance Controls Bar -->
+        <div class="card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: center;">
+            <div>
+              <label class="form-label">Attendance Date</label>
+              <input type="date" id="attendanceDate" class="form-control">
+            </div>
+
+            <div>
+              <label class="form-label">Search Student</label>
+              <input type="text" id="attSearchInput" class="form-control" placeholder="Search by name or ID...">
+            </div>
+
+            <div>
+              <label class="form-label">Filter by Semester</label>
+              <select id="attFilterSem" class="form-control">
+                <option value="">All Semesters</option>
+                <option value="Semester 4">Semester 4</option>
+                <option value="Semester 5">Semester 5</option>
+                <option value="Semester 6">Semester 6</option>
+                <option value="Semester 8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attendance Table Card -->
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Roll / ID</th>
+                  <th>Student Info</th>
+                  <th>Program</th>
+                  <th>Semester</th>
+                  <th>Today's Status</th>
+                  <th>Cumulative Record</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceTableBody">
+                <!-- Injected dynamically by attendance.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/attendance.js"></script>
+</body>
+</html>

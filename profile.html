@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riya Dubey - Engineering Student Portfolio &amp; Profile</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .profile-hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.4);
+    }
+    .profile-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 260px;
+      height: 260px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+    .profile-hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .profile-avatar-wrap {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid #818cf8;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .profile-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .upload-avatar-trigger {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s;
+    }
+    .upload-avatar-trigger:hover {
+      transform: scale(1.1);
+    }
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-full);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+    .project-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      background: var(--bg-surface-alt);
+      transition: all var(--transition-fast);
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item active">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn"><i class="fas fa-bars"></i></button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <!-- Hero Header Card with Photo Upload -->
+        <div class="profile-hero">
+          <div class="profile-hero-content">
+            <div class="profile-avatar-wrap">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya Dubey" style="display: none;">
+              <label for="avatarFileInput" class="upload-avatar-trigger" title="Upload Custom Photo">
+                <i class="fas fa-camera"></i>
+              </label>
+              <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+            </div>
+
+            <div style="flex: 1; min-width: 260px;">
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">Verified Identity</span>
+                <span class="badge" style="background: #10b981; color: white;">Computer Science &amp; Eng</span>
+              </div>
+              <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.35rem; letter-spacing: -0.02em;">
+                Riya Dubey
+              </h1>
+              <p style="font-size: 1.05rem; opacity: 0.9; margin-bottom: 0.75rem;">
+                Engineering Student &bull; Prayagraj, Uttar Pradesh, India
+              </p>
+              <div style="display: flex; gap: 1.5rem; font-size: 0.88rem; opacity: 0.8; flex-wrap: wrap;">
+                <span><i class="fas fa-map-marker-alt"></i> Prayagraj, UP, India</span>
+                <span><i class="fas fa-envelope"></i> riya.dubey@student.edu.in</span>
+                <span><i class="fas fa-phone"></i> +91 98765 43210</span>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn btn-primary" id="editProfileBtn" style="background: #ffffff; color: var(--primary); font-weight: 700;">
+                <i class="fas fa-user-edit"></i> Edit Profile Info
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Bio & Details -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+          <!-- Left Column: About Me, Skills, Projects -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- About Me Card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-quote-left" style="color: var(--primary);"></i> About Me</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.7;" id="displayAbout">
+                I am Riya Dubey, an engineering student from Prayagraj. I am passionate about technology, web development, communication, and learning new skills. I believe in continuous improvement and building innovative projects.
+              </p>
+            </div>
+
+            <!-- Core Skills & Competencies -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-bolt" style="color: #f59e0b;"></i> Skills &amp; Key Competencies</h3>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;" id="skillsList">
+                <span class="skill-tag"><i class="fas fa-comments"></i> Good Communication Skills</span>
+                <span class="skill-tag"><i class="fas fa-puzzle-piece"></i> Problem Solving</span>
+                <span class="skill-tag"><i class="fas fa-users"></i> Teamwork &amp; Collaboration</span>
+                <span class="skill-tag"><i class="fas fa-rocket"></i> Learning New Technologies</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5 &amp; CSS3</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> Vanilla JavaScript (ES6+)</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> Database &amp; LocalStorage</span>
+                <span class="skill-tag"><i class="fas fa-code-branch"></i> Data Structures &amp; Algorithms</span>
+              </div>
+            </div>
+
+            <!-- Featured Engineering Projects -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-laptop-code" style="color: var(--primary);"></i> Academic &amp; Development Projects</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="project-card">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-main);">
+                      SaaS Student Management System
+                    </h4>
+                    <span class="badge badge-success">Completed &bull; Live</span>
+                  </div>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                    A modern, fully responsive SaaS dashboard built with HTML5, CSS3, and JavaScript featuring full CRUD, attendance tracking, exam reporting, and interactive data visualization.
+                  </p>
+                  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span class="badge badge-primary">HTML5</span>
+                    <span class="badge badge-primary">CSS3</span>
+                    <span class="badge badge-primary">JavaScript</span>
+                    <span class="badge badge-primary">Chart.js</span>
+                  </div>
+                </div>
+
+                <div class="project-card">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-main);">
+                      Prayagraj Smart Campus Navigator
+                    </h4>
+                    <span class="badge badge-primary">Academic Major</span>
+                  </div>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                    Interactive campus routing and classroom allocation tool designed to optimize movement schedules for undergraduate engineering students.
+                  </p>
+                  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span class="badge badge-primary">Web Tech</span>
+                    <span class="badge badge-primary">Algorithms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Education & Quick Info -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Education History -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-university" style="color: var(--secondary);"></i> Education</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div style="border-left: 3px solid var(--primary); padding-left: 1rem;">
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">Bachelor of Technology (B.Tech)</h4>
+                  <div style="font-size: 0.82rem; color: var(--text-muted);">Computer Science &amp; Engineering</div>
+                  <div style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">2023 - 2027 &bull; Prayagraj, UP</div>
+                </div>
+                <div style="border-left: 3px solid var(--border-color); padding-left: 1rem;">
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">Senior Secondary (10+2)</h4>
+                  <div style="font-size: 0.82rem; color: var(--text-muted);">Science (PCM) &bull; First Division with Distinction</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted);">Prayagraj, Uttar Pradesh</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact & Social Info -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-address-book" style="color: var(--info);"></i> Contact Information</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.88rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <div class="btn-icon" style="color: var(--primary);"><i class="fas fa-envelope"></i></div>
+                  <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Email</div>
+                    <div style="font-weight: 600;" id="displayEmail">riya.dubey@student.edu.in</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <div class="btn-icon" style="color: var(--success);"><i class="fas fa-phone"></i></div>
+                  <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Phone</div>
+                    <div style="font-weight: 600;" id="displayPhone">+91 98765 43210</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <div class="btn-icon" style="color: var(--secondary);"><i class="fas fa-map-marker-alt"></i></div>
+                  <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Location</div>
+                    <div style="font-weight: 600;" id="displayLocation">Prayagraj, Uttar Pradesh, India</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="profileEditModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-user-edit" style="color: var(--primary);"></i> Edit Riya Dubey's Profile</h3>
+        <i class="fas fa-times modal-close" id="closeProfileModal"></i>
+      </div>
+      <form id="profileEditForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="editName" value="Riya Dubey" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Profession / Role</label>
+            <input type="text" class="form-control" id="editRole" value="Engineering Student" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="editEmail" value="riya.dubey@student.edu.in" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="editPhone" value="+91 98765 43210" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-control" id="editLocation" value="Prayagraj, Uttar Pradesh, India" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">About Me Statement</label>
+          <textarea class="form-control" id="editAbout" rows="4" required></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelProfileModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const profile = AppState.getProfile();
+      const modal = document.getElementById("profileEditModal");
+      const openBtn = document.getElementById("editProfileBtn");
+      const closeBtn = document.getElementById("closeProfileModal");
+      const cancelBtn = document.getElementById("cancelProfileModal");
+      const form = document.getElementById("profileEditForm");
+      const fileInput = document.getElementById("avatarFileInput");
+
+      // Load initial about
+      document.getElementById("displayAbout").textContent = profile.about;
+      document.getElementById("displayEmail").textContent = profile.email;
+      document.getElementById("displayPhone").textContent = profile.phone;
+      document.getElementById("displayLocation").textContent = profile.location;
+
+      // Handle Avatar upload
+      if (fileInput) {
+        fileInput.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+              const base64 = evt.target.result;
+              profile.avatar = base64;
+              AppState.saveProfile(profile);
+
+              // Update all images in view
+              document.querySelectorAll(".dyn-avatar-img").forEach(img => {
+                img.src = base64;
+                img.style.display = "block";
+              });
+              document.querySelectorAll(".dyn-avatar-fallback").forEach(el => el.style.display = "none");
+              showToast("Profile photograph updated successfully!", "success");
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      if (openBtn) {
+        openBtn.addEventListener("click", () => {
+          document.getElementById("editName").value = profile.name;
+          document.getElementById("editRole").value = profile.role;
+          document.getElementById("editEmail").value = profile.email;
+          document.getElementById("editPhone").value = profile.phone;
+          document.getElementById("editLocation").value = profile.location;
+          document.getElementById("editAbout").value = profile.about;
+          modal.classList.add("active");
+        });
+      }
+
+      if (closeBtn) closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      if (cancelBtn) cancelBtn.addEventListener("click", () => modal.classList.remove("active"));
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          profile.name = document.getElementById("editName").value.trim();
+          profile.role = document.getElementById("editRole").value.trim();
+          profile.email = document.getElementById("editEmail").value.trim();
+          profile.phone = document.getElementById("editPhone").value.trim();
+          profile.location = document.getElementById("editLocation").value.trim();
+          profile.about = document.getElementById("editAbout").value.trim();
+
+          AppState.saveProfile(profile);
+          modal.classList.remove("active");
+
+          document.getElementById("displayAbout").textContent = profile.about;
+          document.getElementById("displayEmail").textContent = profile.email;
+          document.getElementById("displayPhone").textContent = profile.phone;
+          document.getElementById("displayLocation").textContent = profile.location;
+          document.querySelectorAll(".dyn-profile-name").forEach(el => el.textContent = profile.name);
+          document.querySelectorAll(".dyn-profile-role").forEach(el => el.textContent = profile.role);
+          document.querySelectorAll(".dyn-profile-location").forEach(el => el.textContent = profile.location);
+
+          showToast("Profile details updated successfully!", "success");
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Student Management System | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Navigation Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item active">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya Dubey" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Sticky Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn" title="Toggle Sidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Search student by name or ID (Press Enter)...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Dark / Light Theme Toggle -->
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+
+          <!-- Quick Action: Notifications -->
+          <button class="btn-icon" title="Notifications" onclick="showToast('You have 2 unread campus announcements from Controller of Exams', 'info')">
+            <i class="fas fa-bell"></i>
+          </button>
+
+          <!-- User Pill Dropdown -->
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+            <i class="fas fa-angle-down" style="font-size: 0.8rem; color: var(--text-muted); margin-left: 0.25rem;"></i>
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Body -->
+      <div class="content-wrapper">
+        <!-- SaaS Hero Welcome Banner -->
+        <div class="welcome-banner">
+          <div class="banner-content">
+            <div class="banner-pill">
+              <i class="fas fa-sparkles"></i> Academic Year 2026-2027 &bull; Active Portal
+            </div>
+            <h1 class="welcome-title">Welcome Back, <span class="dyn-profile-name">Riya Dubey</span>!</h1>
+            <p class="welcome-subtitle">
+              Here is what is happening across your engineering department today. You have <strong>3 upcoming lectures</strong>, your overall attendance is standing high at <strong>96%</strong>, and mid-term results are published.
+            </p>
+            <div class="banner-actions">
+              <a href="students.html" class="btn btn-primary" style="background: #ffffff; color: #4f46e5; font-weight: 600;">
+                <i class="fas fa-user-plus"></i> Manage Students
+              </a>
+              <a href="attendance.html" class="btn btn-outline-primary" style="border-color: rgba(255,255,255,0.4); color: #ffffff;">
+                <i class="fas fa-calendar-check"></i> Mark Daily Attendance
+              </a>
+              <a href="profile.html" class="btn btn-secondary" style="background: rgba(255,255,255,0.15); color: #ffffff; border: none;">
+                <i class="fas fa-id-badge"></i> View My Portfolio
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Metric Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Total Enrolled Students</div>
+              <div class="stat-value" id="dashTotalStudents">6</div>
+              <div class="stat-trend up">
+                <i class="fas fa-arrow-up"></i> +12% from last term
+              </div>
+            </div>
+            <div class="stat-icon indigo">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Active Courses</div>
+              <div class="stat-value" id="dashTotalCourses">4</div>
+              <div class="stat-trend up">
+                <i class="fas fa-check-circle"></i> Fully accredited
+              </div>
+            </div>
+            <div class="stat-icon purple">
+              <i class="fas fa-book"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Faculty &amp; Professors</div>
+              <div class="stat-value" id="dashTotalTeachers">18</div>
+              <div class="stat-trend up">
+                <i class="fas fa-star"></i> 4.9 Faculty Rating
+              </div>
+            </div>
+            <div class="stat-icon blue">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Riya's Attendance Rate</div>
+              <div class="stat-value" id="dashAvgAttendance">96%</div>
+              <div class="stat-trend up">
+                <i class="fas fa-award"></i> Excellent Attendance
+              </div>
+            </div>
+            <div class="stat-icon emerald">
+              <i class="fas fa-check-double"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts and Activity Feed Grid -->
+        <div class="dashboard-grid">
+          <!-- Weekly Attendance Analytics Chart -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">
+                  <i class="fas fa-chart-line" style="color: var(--primary);"></i> Weekly Attendance Analytics
+                </h3>
+                <p class="card-subtitle">Real-time attendance turnout rates across Engineering branches</p>
+              </div>
+              <span class="badge badge-primary">Past 7 Days</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="attendanceChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Department Distribution Doughnut -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">
+                  <i class="fas fa-pie-chart" style="color: var(--secondary);"></i> Department Ratio
+                </h3>
+                <p class="card-subtitle">Student enrollment split</p>
+              </div>
+            </div>
+            <div class="chart-container" style="min-height: 240px;">
+              <canvas id="deptChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activities & Upcoming Schedule -->
+        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">
+          <!-- Recent Activities -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-history" style="color: var(--info);"></i> Recent Activity Log
+              </h3>
+              <a href="notices.html" class="btn btn-secondary btn-sm">View All</a>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--primary-light); color: var(--primary);">
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="activity-details">
+                  <div class="activity-title">New student registration completed</div>
+                  <div class="activity-time">Aarav Sharma enrolled in B.Tech CSE &bull; 2 hours ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--success-bg); color: var(--success);">
+                  <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="activity-details">
+                  <div class="activity-title">Attendance marked for Semester 6</div>
+                  <div class="activity-time">Riya Dubey verified today's class register &bull; 4 hours ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--warning-bg); color: var(--warning);">
+                  <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="activity-details">
+                  <div class="activity-title">Mid-Term Grade Sheets Published</div>
+                  <div class="activity-time">Advanced Data Structures results verified &bull; Yesterday</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming College Events & Classes -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-calendar-alt" style="color: var(--primary);"></i> Upcoming College Schedule
+              </h3>
+              <a href="timetable.html" class="btn btn-secondary btn-sm">Full Timetable</a>
+            </div>
+            <div>
+              <div class="event-item">
+                <div class="event-date-box">
+                  <span class="month">Nov</span>
+                  <span class="day">10</span>
+                </div>
+                <div class="event-info">
+                  <div class="event-title">Full-Stack Web Dev Lab Session</div>
+                  <div class="event-time"><i class="far fa-clock"></i> 02:00 PM - 04:00 PM &bull; Software Center 2</div>
+                </div>
+                <span class="badge badge-primary">Lecture</span>
+              </div>
+
+              <div class="event-item">
+                <div class="event-date-box">
+                  <span class="month">Nov</span>
+                  <span class="day">15</span>
+                </div>
+                <div class="event-info">
+                  <div class="event-title">Innovate Prayagraj 2026 Tech Fest</div>
+                  <div class="event-time"><i class="far fa-clock"></i> 09:30 AM &bull; Main Auditorium</div>
+                </div>
+                <span class="badge badge-success">Campus Event</span>
+              </div>
+
+              <div class="event-item">
+                <div class="event-date-box">
+                  <span class="month">Dec</span>
+                  <span class="day">01</span>
+                </div>
+                <div class="event-info">
+                  <div class="event-title">End-Semester University Examinations</div>
+                  <div class="event-time"><i class="far fa-clock"></i> Morning Shift &bull; Central Examination Hall</div>
+                </div>
+                <span class="badge badge-warning">Exam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

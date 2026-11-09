@@ -1,0 +1,127 @@
+/* ==========================================================================
+   RIYA DUBEY - STUDENT MANAGEMENT SYSTEM
+   Responsive Stylesheet & Breakpoints (Desktop, Tablet, Mobile)
+   ========================================================================== */
+
+/* Large Tablets & Small Desktops (<= 1024px) */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+/* Tablets (<= 860px) */
+@media (max-width: 860px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .global-search {
+    width: 220px;
+  }
+  
+  .global-search input:focus {
+    width: 260px;
+  }
+
+  .user-info-text {
+    display: none;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-banner {
+    padding: 1.75rem;
+  }
+}
+
+/* Mobile Phones (<= 640px) */
+@media (max-width: 640px) {
+  .topbar {
+    padding: 0 1rem;
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .global-search {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.15rem;
+  }
+
+  .welcome-banner {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .welcome-title {
+    font-size: 1.35rem;
+  }
+
+  .banner-actions {
+    flex-direction: column;
+  }
+
+  .banner-actions .btn {
+    width: 100%;
+  }
+
+  .modal-card {
+    padding: 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+
+/* Sidebar Backdrop on Mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 45;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}

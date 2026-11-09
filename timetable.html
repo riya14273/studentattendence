@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Timetable - Portal | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .day-filter-btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 1px solid var(--border-color);
+    }
+    .day-filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item active">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn"><i class="fas fa-bars"></i></button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div>
+            <h1 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              Weekly Class Timetable &amp; Schedule
+            </h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Current Semester 6 timetable for Computer Science &amp; Engineering &bull; Prayagraj Campus
+            </p>
+          </div>
+          <button class="btn btn-primary" id="addClassSlotBtn">
+            <i class="fas fa-plus"></i> Add Class Period
+          </button>
+        </div>
+
+        <!-- Day filter pills -->
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <button class="day-filter-btn active" data-day="All">All Days</button>
+          <button class="day-filter-btn" data-day="Monday">Monday</button>
+          <button class="day-filter-btn" data-day="Tuesday">Tuesday</button>
+          <button class="day-filter-btn" data-day="Wednesday">Wednesday</button>
+          <button class="day-filter-btn" data-day="Thursday">Thursday</button>
+          <button class="day-filter-btn" data-day="Friday">Friday</button>
+        </div>
+
+        <!-- Schedule Cards Grid -->
+        <div id="timetableGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Slot Modal -->
+  <div class="modal-overlay" id="slotModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-calendar-plus" style="color: var(--primary);"></i> Add Class Period</h3>
+        <i class="fas fa-times modal-close" id="closeSlotModal"></i>
+      </div>
+      <form id="slotForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Day of Week</label>
+            <select class="form-control" id="slotDay" required>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time Window</label>
+            <input type="text" class="form-control" id="slotTime" placeholder="e.g. 10:00 AM - 11:30 AM" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Subject Name</label>
+            <input type="text" class="form-control" id="slotSubject" placeholder="e.g. Software Engineering" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Course Code</label>
+            <input type="text" class="form-control" id="slotCode" placeholder="e.g. CS605" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Classroom / Lab Location</label>
+            <input type="text" class="form-control" id="slotRoom" placeholder="e.g. Lab 4 or LH-102" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Faculty / Professor</label>
+            <input type="text" class="form-control" id="slotInstructor" placeholder="e.g. Dr. Sunita Sharma" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelSlotBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Period to Schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let timetable = AppState.getTimetable();
+      let activeFilterDay = "All";
+
+      const grid = document.getElementById("timetableGrid");
+      const dayBtns = document.querySelectorAll(".day-filter-btn");
+      const modal = document.getElementById("slotModal");
+      const form = document.getElementById("slotForm");
+      const addBtn = document.getElementById("addClassSlotBtn");
+      const closeBtn = document.getElementById("closeSlotModal");
+      const cancelBtn = document.getElementById("cancelSlotBtn");
+
+      function renderTimetable() {
+        let list = [...timetable];
+        if (activeFilterDay !== "All") {
+          list = list.filter(t => t.day === activeFilterDay);
+        }
+
+        grid.innerHTML = "";
+
+        if (list.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1;">
+              <div class="empty-state">
+                <div class="empty-state-icon"><i class="fas fa-calendar-times"></i></div>
+                <h4 class="empty-state-title">No Classes on ${activeFilterDay}</h4>
+                <p class="empty-state-text">No academic periods scheduled for this day.</p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        list.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.style.borderLeft = "4px solid var(--primary)";
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <span class="badge badge-primary">${item.day}</span>
+              <button class="btn-icon btn-sm delete-slot-btn" data-idx="${index}" style="color: var(--danger); width: 28px; height: 28px;">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              ${item.subject}
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--primary); font-family: monospace; font-weight: 600; margin-bottom: 0.85rem;">
+              ${item.code}
+            </p>
+
+            <div style="background: var(--bg-surface-alt); padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.83rem; display: flex; flex-direction: column; gap: 0.4rem;">
+              <div>
+                <i class="far fa-clock" style="color: var(--text-muted); width: 16px;"></i>
+                <strong style="margin-left: 0.35rem; color: var(--text-main);">${item.time}</strong>
+              </div>
+              <div>
+                <i class="fas fa-map-marker-alt" style="color: var(--text-muted); width: 16px;"></i>
+                <span style="margin-left: 0.35rem; color: var(--text-muted);">${item.room}</span>
+              </div>
+              <div>
+                <i class="fas fa-chalkboard-teacher" style="color: var(--text-muted); width: 16px;"></i>
+                <span style="margin-left: 0.35rem; color: var(--text-muted);">${item.instructor}</span>
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        // Delete slot
+        document.querySelectorAll(".delete-slot-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const idx = parseInt(btn.getAttribute("data-idx"));
+            if (confirm("Remove this period from timetable?")) {
+              timetable.splice(idx, 1);
+              AppState.saveTimetable(timetable);
+              renderTimetable();
+              showToast("Class period removed", "danger");
+            }
+          });
+        });
+      }
+
+      dayBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          dayBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeFilterDay = btn.getAttribute("data-day");
+          renderTimetable();
+        });
+      });
+
+      if (addBtn) addBtn.addEventListener("click", () => modal.classList.add("active"));
+      if (closeBtn) closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      if (cancelBtn) cancelBtn.addEventListener("click", () => modal.classList.remove("active"));
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const day = document.getElementById("slotDay").value;
+          const time = document.getElementById("slotTime").value.trim();
+          const subject = document.getElementById("slotSubject").value.trim();
+          const code = document.getElementById("slotCode").value.trim();
+          const room = document.getElementById("slotRoom").value.trim();
+          const instructor = document.getElementById("slotInstructor").value.trim();
+
+          timetable.push({ day, time, subject, code, room, instructor });
+          AppState.saveTimetable(timetable);
+          modal.classList.remove("active");
+          form.reset();
+          renderTimetable();
+          showToast(`Added ${subject} to ${day} timetable`, "success");
+        });
+      }
+
+      renderTimetable();
+    });
+  </script>
+</body>
+</html>

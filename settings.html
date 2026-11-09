@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings &amp; System Configuration | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item active">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn"><i class="fas fa-bars"></i></button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div style="margin-bottom: 1.75rem;">
+          <h1 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+            System Settings &amp; Preferences
+          </h1>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Manage application appearance, database backups, notifications, and reset demo data.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px;">
+          <!-- Appearance & Theme Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-palette" style="color: var(--primary);"></i> Appearance &amp; Display</h3>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <div>
+                <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Theme Mode</strong>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Switch between Light and Dark SaaS modes</span>
+              </div>
+              <button class="btn btn-secondary theme-toggle-btn">
+                <i class="fas fa-moon"></i> Toggle Dark / Light
+              </button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0 0;">
+              <div>
+                <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">Sound &amp; Toast Feedback</strong>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Display real-time notification alerts on actions</span>
+              </div>
+              <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary);">
+            </div>
+          </div>
+
+          <!-- Academic Configuration Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-school" style="color: var(--secondary);"></i> Academic Session Configuration</h3>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Current Academic Year</label>
+                <input type="text" class="form-control" value="2026-2027" readonly>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Active Term</label>
+                <input type="text" class="form-control" value="Spring Semester" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Institution</label>
+              <input type="text" class="form-control" value="Prayagraj Engineering Institute / AKTU Affiliate" readonly>
+            </div>
+          </div>
+
+          <!-- Data Backup & Reset (Danger Zone) -->
+          <div class="card" style="border: 1px solid var(--danger);">
+            <div class="card-header">
+              <h3 class="card-title" style="color: var(--danger);"><i class="fas fa-database"></i> Database Management</h3>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              All records (Students, Attendance, Courses, Grades, Profile, Notices) are stored locally in your browser's LocalStorage. You can reset or reseed back to Riya Dubey's default clean dataset anytime.
+            </p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary" onclick="showToast('Backup JSON exported successfully to memory', 'success')">
+                <i class="fas fa-download"></i> Backup Local Database
+              </button>
+              <button type="button" class="btn btn-danger" id="resetDataBtn">
+                <i class="fas fa-trash-restore"></i> Reset All Data to Default Demo
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const resetBtn = document.getElementById("resetDataBtn");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          if (confirm("Are you sure you want to reset all data back to the default demo state for Riya Dubey?")) {
+            AppState.resetData();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

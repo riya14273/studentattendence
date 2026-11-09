@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management - Portal | Riya Dubey</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-details">
+          <span class="brand-title">EduPortal</span>
+          <span class="brand-subtitle">By Riya Dubey</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="students.html" class="nav-item active">
+          <i class="fas fa-user-graduate"></i>
+          <span>Students</span>
+          <span class="badge-count" id="sidebarStuCount">6</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>Courses</span>
+        </a>
+        <a href="examinations.html" class="nav-item">
+          <i class="fas fa-award"></i>
+          <span>Exams &amp; Results</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i class="fas fa-clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="notices.html" class="nav-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Notice Board</span>
+        </a>
+
+        <div class="menu-category">Account &amp; System</div>
+        <a href="profile.html" class="nav-item">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout-trigger" style="color: var(--danger);">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="profile-card-mini">
+          <div class="avatar">
+            <span class="dyn-avatar-fallback">RD</span>
+            <img class="dyn-avatar-img" src="" alt="Riya" style="display: none;">
+          </div>
+          <div class="info">
+            <div class="name dyn-profile-name">Riya Dubey</div>
+            <div class="role dyn-profile-role">Engineering Student</div>
+          </div>
+          <i class="fas fa-chevron-right" style="font-size: 0.75rem; color: #94a3b8;"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle btn-icon" id="menuToggleBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="global-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="globalSearchInput" placeholder="Quick search across portal...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon theme-toggle-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <a href="profile.html" class="user-dropdown-btn">
+            <div class="user-avatar-sm">
+              <span class="dyn-avatar-fallback">RD</span>
+              <img class="dyn-avatar-img" src="" alt="Riya" style="display:none;">
+            </div>
+            <div class="user-info-text">
+              <span class="user-name dyn-profile-name">Riya Dubey</span>
+              <span class="user-role dyn-profile-location">Prayagraj, UP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <!-- Page Title & Header Actions -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.75rem;">
+          <div>
+            <h1 style="font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+              Student Management Directory
+            </h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Maintain, register, update, and export verified student profiles and academic statuses.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-secondary" id="exportCsvBtn">
+              <i class="fas fa-file-csv"></i> Export to CSV
+            </button>
+            <button class="btn btn-primary" id="addStudentBtn">
+              <i class="fas fa-user-plus"></i> Add New Student
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar Card -->
+        <div class="card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: center;">
+            <div style="position: relative;">
+              <i class="fas fa-search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+              <input type="text" id="studentSearchInput" class="form-control" style="padding-left: 2.6rem;" placeholder="Search by name, ID, or email...">
+            </div>
+
+            <div>
+              <select id="filterCourse" class="form-control">
+                <option value="">All Degree Courses</option>
+                <option value="B.Tech CSE">B.Tech CSE</option>
+                <option value="B.Tech IT">B.Tech IT</option>
+                <option value="B.Tech ECE">B.Tech ECE</option>
+                <option value="BCA">BCA</option>
+              </select>
+            </div>
+
+            <div>
+              <select id="filterSemester" class="form-control">
+                <option value="">All Semesters</option>
+                <option value="Semester 4">Semester 4</option>
+                <option value="Semester 5">Semester 5</option>
+                <option value="Semester 6">Semester 6</option>
+                <option value="Semester 8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Students Table Card -->
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Student Info</th>
+                  <th>Course &amp; Sem</th>
+                  <th>Contact Phone</th>
+                  <th>Attendance</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody">
+                <!-- Injected dynamically by students.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add / Edit Student Modal -->
+  <div class="modal-overlay" id="studentModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalStudentTitle"><i class="fas fa-user-edit" style="color: var(--primary);"></i> Add New Student</h3>
+        <i class="fas fa-times modal-close" id="closeStudentModal"></i>
+      </div>
+      <form id="studentForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Student ID</label>
+            <input type="text" class="form-control" id="studentIdInput" required placeholder="e.g. STU-1007">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="studentNameInput" required placeholder="Full Name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="studentEmailInput" required placeholder="student@college.edu.in">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="studentPhoneInput" required placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Course / Program</label>
+            <select class="form-control" id="studentCourseInput" required>
+              <option value="B.Tech CSE">B.Tech CSE</option>
+              <option value="B.Tech IT">B.Tech IT</option>
+              <option value="B.Tech ECE">B.Tech ECE</option>
+              <option value="BCA">BCA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Semester</label>
+            <select class="form-control" id="studentSemInput" required>
+              <option value="Semester 1">Semester 1</option>
+              <option value="Semester 2">Semester 2</option>
+              <option value="Semester 3">Semester 3</option>
+              <option value="Semester 4">Semester 4</option>
+              <option value="Semester 5">Semester 5</option>
+              <option value="Semester 6" selected>Semester 6</option>
+              <option value="Semester 7">Semester 7</option>
+              <option value="Semester 8">Semester 8</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Attendance (%)</label>
+            <input type="number" class="form-control" id="studentAttInput" min="0" max="100" value="95" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-control" id="studentStatusInput">
+              <option value="Active">Active</option>
+              <option value="Warning">Warning</option>
+              <option value="Suspended">Suspended</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelStudentForm">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- View Student Profile Modal -->
+  <div class="modal-overlay" id="viewStudentModal">
+    <div class="modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fas fa-id-card" style="color: var(--primary);"></i> Student Profile Details</h3>
+        <i class="fas fa-times modal-close" id="closeViewModal"></i>
+      </div>
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; overflow: hidden; margin-bottom: 0.75rem; box-shadow: var(--shadow-md);">
+          <span id="viewAvatarInitials">R</span>
+          <img id="viewAvatarImg" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+        </div>
+        <h3 id="viewName" style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">Riya Dubey</h3>
+        <p id="viewId" style="font-size: 0.85rem; color: var(--primary); font-family: monospace; font-weight: 600;">STU-1001</p>
+      </div>
+
+      <div style="background: var(--bg-surface-alt); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.88rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Email:</span>
+          <strong id="viewEmail" style="color: var(--text-main);">email@test.com</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Phone:</span>
+          <strong id="viewPhone" style="color: var(--text-main);">+91 98765 43210</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Course:</span>
+          <strong id="viewCourse" style="color: var(--text-main);">B.Tech CSE</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Attendance:</span>
+          <strong id="viewAttendance" style="color: var(--success);">96%</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-card" style="max-width: 440px; text-align: center;">
+      <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--danger-bg); color: var(--danger); font-size: 1.75rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;">
+        Confirm Record Deletion
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        Are you sure you want to permanently remove <strong id="deleteStudentName" style="color: var(--text-main);">Student</strong>? This action cannot be reversed.
+      </p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">No, Keep Student</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete Record</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/students.js"></script>
+</body>
+</html>
